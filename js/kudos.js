@@ -2,7 +2,7 @@ var kudoList = [
 		{
 			person : 'Bruno Buss',
 			reason : 'You\'re nice too =P',
-			date   : '2013-07-10T16:30'
+			date   : '2013-07-03T16:30'
 		},
 		{
 			person : 'Garu',
@@ -16,19 +16,32 @@ var kudoList = [
 		},
 	];
 
+function getTimeNow () {
+	var today = new Date();
+
+	var dd = today.getUTCDate(),
+	    MM = today.getUTCMonth() + 1,
+	    yy = today.getUTCFullYear(),
+	    hh = today.getUTCHours(),
+	    mm = today.getUTCMinutes();
+
+	function pad(n){return n<10 ? '0'+n : n};
+
+	return yy + '-' + pad(MM) + '-' + pad(dd)
+			  + 'T' + pad(hh) + ':' + pad(mm);
+
+};
+
 angular.module('kudos', ['ui.bootstrap']);
 
 function KudosList($scope) {
 	$scope.kudos = kudoList;
 
 	$scope.repostKudo = function($index) {
-
-		var today = new Date();
-
 		var newKudo = {
 			person : $scope.kudos[$index].person,
 			reason : $scope.kudos[$index].reason,
-			date   : '2013-07-07T14:00'
+			date   : getTimeNow()
 		};
 
 		kudoList.unshift( newKudo );
@@ -39,7 +52,13 @@ function KudosSubmit($scope) {
 	$scope.users = [ 'Bruno Buss', 'Garu', 'Vinicius Japa' ];
 
 	$scope.addKudo = function() {
-		kudoList.unshift( { person : $scope.personName, reason : $scope.kudoText, date : 'just now' } );
+		var newKudo = {
+			person : $scope.personName,
+			reason : $scope.kudoText,
+			date   : getTimeNow()
+		};
+		kudoList.unshift( newKudo );
+
 		$scope.personName = '';
 		$scope.kudoText = '';
 	};
