@@ -20,6 +20,19 @@ angular.module('kudos', ['ui.bootstrap']);
 
 function KudosList($scope) {
 	$scope.kudos = kudoList;
+
+	$scope.repostKudo = function($index) {
+
+		var today = new Date();
+
+		var newKudo = {
+			person : $scope.kudos[$index].person,
+			reason : $scope.kudos[$index].reason,
+			date   : '2013-07-07T14:00'
+		};
+
+		kudoList.unshift( newKudo );
+	};
 }
 
 function KudosSubmit($scope) {
