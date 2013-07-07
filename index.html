@@ -37,7 +37,30 @@
 			<div class="row" ng-controller="KudosList">
 				<div class="span4">
 
-					<div class="row" ng-repeat="kudo in kudos | orderBy:'date':true ">
+					<div class="row">
+						<form class="form-inline" ng-submit="refreshKudos()">
+							<button type="submit" class="btn btn-primary">
+								<i class="icon-refresh icon-white"></i>
+							</button>
+
+							Show last: 
+
+							<label class="radio">
+								<input type="radio" ng-model="lastN" value="5"> 5
+							</label>
+
+							<label class="radio">
+								<input type="radio" ng-model="lastN" value="10"> 10
+							</label>
+
+							<label class="radio">
+								<input type="radio" ng-model="lastN" value="30"> 30
+							</label>
+
+						</form>	
+					</div>
+
+					<div class="row" ng-repeat="kudo in kudos | orderBy:'date':true | limitTo:lastN ">
 						<p>
 							<a class="btn btn-success btn-mini" ng-click="repostKudo($index)" tooltip-placement="left" tooltip="Repost this Kudo!">
 								<i class="icon-thumbs-up icon-white"></i>

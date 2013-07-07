@@ -35,6 +35,7 @@ function getTimeNow () {
 angular.module('kudos', ['ui.bootstrap']);
 
 function KudosList($scope) {
+	$scope.lastN = 10;
 	$scope.kudos = kudoList;
 
 	$scope.repostKudo = function($index) {
@@ -45,6 +46,9 @@ function KudosList($scope) {
 		};
 
 		kudoList.unshift( newKudo );
+	};
+
+	$scope.refreshKudos = function() {
 	};
 }
 
