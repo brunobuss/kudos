@@ -2,17 +2,17 @@ var kudoList = [
 		{
 			person : 'Bruno Buss',
 			reason : 'You\'re nice too =P',
-			date   : '03/07/2013'
+			date   : '2013-07-10T16:30'
 		},
 		{
 			person : 'Garu',
 			reason : 'Great deploy!',
-			date   : '02/07/2013'
+			date   : '2013-07-01T09:54'
 		},
 		{
 			person : 'Vinicius Japa',
 			reason : 'Awesome bug fix!',
-			date   : '01/06/2013'
+			date   : '2013-06-03T15:33'
 		},
 	];
 
