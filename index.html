@@ -19,11 +19,11 @@
 				<form ng-submit="addKudo()">
 					<fieldset>
 						<div class="span3">
-							<input type="text" typeahead="user for user in users | filter:$viewValue" placeholder="Team Member" ng-model="personName">
+							<input type="text" typeahead="user for user in users | filter:$viewValue" placeholder="Team Member" ng-model="personName" required>
 						</div>
 
 						<div class="span3">
-							<input type="text" placeholder="Yay! Thanks for..." ng-model="kudoText">
+							<input type="text" placeholder="Yay! Thanks for..." ng-model="kudoText" required>
 						</div>
 
 						<div class="span1">
