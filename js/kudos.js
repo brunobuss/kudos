@@ -1,20 +1,3 @@
-var kudoList = [
-		{
-			person : 'Bruno Buss',
-			reason : 'You\'re nice too =P',
-			date   : '2013-07-03T16:30'
-		},
-		{
-			person : 'Garu',
-			reason : 'Great deploy!',
-			date   : '2013-07-01T09:54'
-		},
-		{
-			person : 'Vinicius Japa',
-			reason : 'Awesome bug fix!',
-			date   : '2013-06-03T15:33'
-		},
-	];
 
 function getTimeNow () {
 	var today = new Date();
@@ -32,36 +15,49 @@ function getTimeNow () {
 
 };
 
-angular.module('kudos', ['ui.bootstrap']);
+var kudosModule = angular.module('kudos', ['ngResource', 'ui.bootstrap']);
 
-function KudosList($scope) {
+kudosModule.factory('kudo', function($resource) {
+	return $resource( 'http://127.0.0.1\\:3000/kudos' );
+});
+
+kudosModule.factory('user', function($resource) {
+	return $resource( 'http://127.0.0.1\\:3000/users' );
+});
+
+function KudosList($scope, kudo) {
 	$scope.lastN = 10;
-	$scope.kudos = kudoList;
+	$scope.kudos = kudo.query();
 
 	$scope.repostKudo = function($index) {
-		var newKudo = {
+
+		var newKudo = new kudo({
 			person : $scope.kudos[$index].person,
 			reason : $scope.kudos[$index].reason,
 			date   : getTimeNow()
-		};
+		});
 
-		kudoList.unshift( newKudo );
+		newKudo.$save();
+		$scope.kudos = kudo.query();
 	};
 
 	$scope.refreshKudos = function() {
+		$scope.kudos = kudo.query();
 	};
 }
 
-function KudosSubmit($scope) {
-	$scope.users = [ 'Bruno Buss', 'Garu', 'Vinicius Japa' ];
+function KudosSubmit($scope, kudo, user) {
+	$scope.users = user.query();
 
 	$scope.addKudo = function() {
-		var newKudo = {
+		var newKudo = new kudo({
 			person : $scope.personName,
 			reason : $scope.kudoText,
 			date   : getTimeNow()
-		};
-		kudoList.unshift( newKudo );
+		});
+
+		newKudo.$save();
+		$scope.kudos = kudo.query();
 
 		$scope.personName = '';
 		$scope.kudoText = '';

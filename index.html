@@ -19,7 +19,7 @@
 				<form ng-submit="addKudo()">
 					<fieldset>
 						<div class="span3">
-							<input type="text" typeahead="user for user in users | filter:$viewValue" placeholder="Team Member" ng-model="personName" required>
+							<input type="text" typeahead="u for u in users | filter:$viewValue" placeholder="Team Member" ng-model="personName" required>
 						</div>
 
 						<div class="span3">
@@ -79,6 +79,7 @@
 		</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
 	<script src="js/ui-bootstrap-custom-tpls-0.5.0.min.js"></script>
 	<script src="js/kudos.js"></script>
 	</body>
