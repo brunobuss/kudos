@@ -73,7 +73,7 @@ options '/kudos' => sub {
 get '/users' => sub {
 	my $self = shift;
 
-	my $content = [ map { $_->{name} } Model::Users->select('ORDER BY name') ];
+	my $content = [ { name => map { $_->{name} } Model::Users->select('ORDER BY name') } ];
 	$self->render( json => $content );
 };
 
