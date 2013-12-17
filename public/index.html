@@ -60,7 +60,7 @@
 
 					<div class="row" ng-repeat="kudo in kudos | orderBy:'date':true | limitTo:lastN ">
 						<p>
-							<a class="btn btn-success btn-mini" ng-click="plusKudo(kudo.id)" tooltip-placement="left" tooltip="Repost this Kudo!">
+							<a class="btn btn-success btn-mini" ng-click="plusKudo(kudo.id)" tooltip-placement="left" tooltip="Upvote this Kudo!">
 								<i class="icon-plus icon-white"></i>
 							</a>
 
@@ -77,9 +77,10 @@
 
 		</div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
-	<script src="js/ui-bootstrap-custom-tpls-0.5.0.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-resource.min.js"></script>
+	<script src="js/ui-bootstrap-tpls-0.7.0.min.js"></script>
 	<script src="js/kudos.js"></script>
 	</body>
 </html>
