@@ -116,7 +116,7 @@ post '/kudos' => sub {
         $user_id = $user->id;
     }
     else {
-        my $user = Mode::Users->select('where name = ?', $new_kudo->{person});
+        my $user = Model::Users->select('where name = ?', $new_kudo->{person});
         $user_id = $user->[0]->id;
     }
 
