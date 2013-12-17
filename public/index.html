@@ -63,7 +63,7 @@
 					<div class="row" ng-repeat="kudo in kudos | orderBy:'date':true | limitTo:lastN ">
 						<p>
 							<a class="btn btn-success btn-mini" ng-click="repostKudo($index)" tooltip-placement="left" tooltip="Repost this Kudo!">
-								<i class="icon-thumbs-up icon-white"></i>
+								<i class="icon-plus icon-white"></i>
 							</a>
 
 							<strong>{{kudo.person}}</strong> ({{kudo.date | date:'dd/MM/yyyy'}})
