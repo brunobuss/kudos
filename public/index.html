@@ -15,7 +15,7 @@
 				&nbsp;
 			</div>
 
-			<div class="row" ng-controller="KudosSubmit">
+			<div class="row" ng-controller="Kudos">
 				<form ng-submit="addKudo()">
 					<fieldset>
 						<div class="span3">
@@ -32,9 +32,7 @@
 
 					</fieldset>
 				</form>
-			</div>
 
-			<div class="row" ng-controller="KudosList">
 				<div class="span4">
 
 					<div class="row">
@@ -62,11 +60,12 @@
 
 					<div class="row" ng-repeat="kudo in kudos | orderBy:'date':true | limitTo:lastN ">
 						<p>
-							<a class="btn btn-success btn-mini" ng-click="repostKudo($index)" tooltip-placement="left" tooltip="Repost this Kudo!">
+							<a class="btn btn-success btn-mini" ng-click="plusKudo(kudo.id)" tooltip-placement="left" tooltip="Repost this Kudo!">
 								<i class="icon-plus icon-white"></i>
 							</a>
 
-							<strong>{{kudo.person}}</strong> ({{kudo.date | date:'dd/MM/yyyy'}})
+							<strong>{{kudo.person}}</strong>
+							({{kudo.date | date:'dd/MM/yyyy'}}) - {{kudo.votes}} vote(s)
 						</p>
 						<p class="text-info">
 							<em>{{kudo.reason}}</em>

@@ -25,29 +25,14 @@ kudosModule.factory('user', function($resource) {
 	return $resource( 'http://127.0.0.1\\:3000/users' );
 });
 
-function KudosList($scope, kudo) {
+kudosModule.factory('kudo_up', function($resource) {
+	return $resource( 'http://127.0.0.1\\:3000/kudos_up' );
+});
+
+function Kudos($scope, kudo, kudo_up, user) {
 	$scope.lastN = 10;
-	$scope.kudos = kudo.query();
-
-	$scope.repostKudo = function($index) {
-
-		var newKudo = new kudo({
-			person : $scope.kudos[$index].person,
-			reason : $scope.kudos[$index].reason,
-			date   : getTimeNow()
-		});
-
-		newKudo.$save();
-		$scope.kudos = kudo.query();
-	};
-
-	$scope.refreshKudos = function() {
-		$scope.kudos = kudo.query();
-	};
-}
-
-function KudosSubmit($scope, kudo, user) {
 	$scope.users = user.query();
+	$scope.kudos = kudo.query();
 
 	$scope.addKudo = function() {
 		var newKudo = new kudo({
@@ -57,9 +42,27 @@ function KudosSubmit($scope, kudo, user) {
 		});
 
 		newKudo.$save();
+
+		$scope.users = user.query();
 		$scope.kudos = kudo.query();
 
 		$scope.personName = '';
 		$scope.kudoText = '';
+	};
+
+	$scope.plusKudo = function(kudo_id) {
+
+		var KudoPlus = new kudo_up({
+			id : kudo_id
+		});
+
+		KudoPlus.$save();
+		$scope.users = user.query();
+		$scope.kudos = kudo.query();
+	};
+
+	$scope.refreshKudos = function() {
+		$scope.users = user.query();
+		$scope.kudos = kudo.query();
 	};
 }

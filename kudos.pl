@@ -58,9 +58,11 @@ get '/kudos' => sub {
     my $content = [ map {
             {
                 id     => $_->{id},
+                p_id   => $_->{person},
                 person => $user_id_to_name->{$_->{person}},
                 reason => $_->{reason},
                 date   => $_->{date},
+                votes  => $_->{votes},
             }
         } Model::Kudos->select('ORDER BY id DESC LIMIT 100') ];
 
@@ -81,9 +83,11 @@ get '/kudos/:user' => sub {
         my $content = [ map {
             {
                 id     => $_->{id},
+                p_id   => $_->{person},
                 person => $user_id_to_name->{$_->{person}},
                 reason => $_->{reason},
                 date   => $_->{date},
+                votes  => $_->{votes},
             }
         } Model::Kudos->select('WHERE person = ? ORDER BY id DESC LIMIT 100', $user) ];
     }
@@ -94,9 +98,11 @@ get '/kudos/:user' => sub {
         my $content = [ map {
             {
                 id     => $_->{id},
+                p_id   => $_->{person},
                 person => $user_id_to_name->{$_->{person}},
                 reason => $_->{reason},
                 date   => $_->{date},
+                votes  => $_->{votes},
             }
         } Model::Kudos->select("WHERE person in ($ph) ORDER BY id DESC LIMIT 100", @$user_ids) ];
     }
