@@ -39,6 +39,12 @@ package main;
 use Mojolicious::Lite;
 use Mojo::JSON;
 
+get '/' => sub {
+    my $self = shift;
+
+    $self->render_static('index.html');
+};
+
 get '/kudos' => sub {
 	my $self = shift;
 
