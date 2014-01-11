@@ -47,8 +47,12 @@ kudosModule.factory('kudo_up', function($resource) {
 kudosModule.controller('Kudos', [ '$scope', '$routeParams', '$location', 'kudo', 'kudo_up', 'user',
     function ($scope, $rtp, $loc, kudo, kudo_up, user) {
         $scope.refreshKudos = function() {
-            $scope.users = user.query();
-            $scope.kudos = kudo.query({search_string:$rtp.id});
+            user.query( {}, function(data, headers){
+                $scope.users = data;
+            });
+            kudo.query( {search_string:$rtp.id}, function(data, headers){
+                $scope.kudos = data;
+            });
         };
 
         $scope.lastN = 10;
@@ -65,9 +69,9 @@ kudosModule.controller('Kudos', [ '$scope', '$routeParams', '$location', 'kudo',
                 date   : getTimeNow()
             });
 
-            newKudo.$save();
-
-            $scope.refreshKudos();
+            newKudo.$save( function(data, headers){
+                $scope.refreshKudos();
+            });
 
             $scope.personName = '';
             $scope.kudoText = '';
@@ -79,7 +83,8 @@ kudosModule.controller('Kudos', [ '$scope', '$routeParams', '$location', 'kudo',
                 id : kudo_id
             });
 
-            KudoPlus.$save();
-            $scope.refreshKudos();
+            KudoPlus.$save( function(data, headers){
+                $scope.refreshKudos();
+            });
         };
 }]);
