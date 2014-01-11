@@ -15,6 +15,7 @@ function getTimeNow () {
 
 };
 
+var myHost = 'http://127.0.0.1\\:3000';
 var kudosModule = angular.module('kudos', ['ngRoute', 'ngResource', 'ui.bootstrap']);
 
 kudosModule.config(function($routeProvider) {
@@ -33,15 +34,15 @@ kudosModule.config(function($routeProvider) {
 });
 
 kudosModule.factory('kudo', function($resource) {
-    return $resource( 'http://127.0.0.1\\:3000/kudos/:search_string' );
+    return $resource( myHost + '/kudos/:search_string' );
 });
 
 kudosModule.factory('user', function($resource) {
-    return $resource( 'http://127.0.0.1\\:3000/users' );
+    return $resource( myHost + '/users' );
 });
 
 kudosModule.factory('kudo_up', function($resource) {
-    return $resource( 'http://127.0.0.1\\:3000/kudos_up' );
+    return $resource( myHost + '/kudos_up' );
 });
 
 kudosModule.controller('Kudos', [ '$scope', '$routeParams', '$location', 'kudo', 'kudo_up', 'user',
