@@ -52,6 +52,11 @@ kudosModule.controller('Kudos', [ '$scope', '$routeParams', '$location', 'kudo',
             });
             kudo.query( {search_string:$rtp.id}, function(data, headers){
                 $scope.kudos = data;
+
+                if ($rtp.id) {
+                    $scope.personName = data[0].person;
+                };
+
             });
         };
 
