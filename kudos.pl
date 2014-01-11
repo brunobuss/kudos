@@ -92,7 +92,9 @@ get '/kudos/:user' => sub {
         } Model::Kudos->select('WHERE person = ? ORDER BY id DESC LIMIT 100', $user) ];
     }
     elsif( $user ne '' ) {
-        my $user_ids = [ map { $_->{id} } Model::Users->select(q{WHERE users.name like '%?%'}, $user ) ];
+
+        $user = '%' . $user . '%';
+        my $user_ids = [ map { $_->{id} } Model::Users->select(qq{WHERE users.name like ? }, $user ) ];
         my $ph = join ', ' => map { '?' } @$user_ids;
 
         $content = [ map {
