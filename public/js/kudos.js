@@ -18,16 +18,22 @@ function getTimeNow () {
 var kudosModule = angular.module('kudos', ['ngRoute', 'ngResource', 'ui.bootstrap']);
 
 kudosModule.config(function($routeProvider) {
-    $routeProvider.when('/:userid', {
-        template   : '',
-        controller : 'Kudos'
-    }).otherwise({
+    $routeProvider.
+    when('/', {
+        controller  : 'Kudos',
+        templateUrl : 'list.html'
+    }).
+    when('/user/:id', {
+        controller  : 'Kudos',
+        templateUrl : 'list.html'
+    }).
+    otherwise({
         redirectTo: '/'
     });
 });
 
 kudosModule.factory('kudo', function($resource) {
-    return $resource( 'http://127.0.0.1\\:3000/kudos' );
+    return $resource( 'http://127.0.0.1\\:3000/kudos/:search_string' );
 });
 
 kudosModule.factory('user', function($resource) {
@@ -39,19 +45,18 @@ kudosModule.factory('kudo_up', function($resource) {
 });
 
 kudosModule.controller('Kudos', [ '$scope', '$routeParams', '$location', 'kudo', 'kudo_up', 'user',
-    function ($scope, rtp, $loc, kudo, kudo_up, user) {
+    function ($scope, $rtp, $loc, kudo, kudo_up, user) {
         $scope.refreshKudos = function() {
             $scope.users = user.query();
-            $scope.kudos = kudo.query();
+            $scope.kudos = kudo.query({search_string:$rtp.id});
         };
 
         $scope.lastN = 10;
         $scope.refreshKudos();
 
-        // console.log($loc);
-
-        // console.log(rtp);
-        // console.log(rtp.userid);
+        if ($rtp.id) {
+            $scope.user_page = true;
+        }
 
         $scope.addKudo = function() {
             var newKudo = new kudo({
@@ -77,6 +82,4 @@ kudosModule.controller('Kudos', [ '$scope', '$routeParams', '$location', 'kudo',
             KudoPlus.$save();
             $scope.refreshKudos();
         };
-
-
 }]);

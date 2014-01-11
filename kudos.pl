@@ -80,7 +80,7 @@ get '/kudos/:user' => sub {
     my $content = [];
 
     if( looks_like_number($user) ) {
-        my $content = [ map {
+        $content = [ map {
             {
                 id     => $_->{id},
                 p_id   => $_->{person},
@@ -95,7 +95,7 @@ get '/kudos/:user' => sub {
         my $user_ids = [ map { $_->{id} } Model::Users->select(q{WHERE users.name like '%?%'}, $user ) ];
         my $ph = join ', ' => map { '?' } @$user_ids;
 
-        my $content = [ map {
+        $content = [ map {
             {
                 id     => $_->{id},
                 p_id   => $_->{person},
